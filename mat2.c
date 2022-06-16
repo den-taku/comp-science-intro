@@ -7,6 +7,7 @@
 #define N 2048
 #define ZERO (double)(0.0)
 #define THREE (double)(3.0)
+#define ONE_OVER_THREE (double)(1.0) / (double)(3.0)
 
 double getrusage_sec(){
     struct rusage t;
@@ -38,12 +39,16 @@ int main(){
             c[i][j] = ZERO;
         }
     } 
-
     for (i = 0; i < N; i++){
         for (k = 0; k < N; k++){
             for (j = 0; j < N; j++){
-                c[i][j] = c[i][j] + a[i][k] * b[k][j] / THREE;
+                c[i][j] = c[i][j] + a[i][k] * b[k][j];
             }
+        }
+    }
+    for (i = 0; i < N; i++) {
+        for (j = 0; j < N; j++) {
+            c[i][j] = c[i][j] * ONE_OVER_THREE;
         }
     }
 
