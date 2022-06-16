@@ -22,6 +22,7 @@ int main(){
     static double a[N][N], b[N][N], c[N][N], s;
     static double t1, t2;
 
+
     srand(1);
 
     for (i = 0; i < N; i++){
@@ -33,25 +34,12 @@ int main(){
 
     t1 = getrusage_sec();
 
+    int n = N;
     double one_over_three = (double)(1.0) / (double)(3.0);
+    int zero = ZERO;
 
-    for (i = 0; i < N; i++) {
-        for (j = 0; j < N; j++) {
-            c[i][j] = ZERO;
-        }
-    } 
-    for (i = 0; i < N; i++){
-        for (k = 0; k < N; k++){
-            for (j = 0; j < N; j++){
-                c[i][j] = c[i][j] + a[i][k] * b[k][j];
-            }
-        }
-    }
-    for (i = 0; i < N; i++) {
-        for (j = 0; j < N; j++) {
-            c[i][j] = c[i][j] * one_over_three;
-        }
-    }
+    dgemm_("N", "N", &n, &n, &n, &one_over_three, b, &n, a, &n, &zero, c, &n);
+
 
     t2 = getrusage_sec();
 
