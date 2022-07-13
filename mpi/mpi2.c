@@ -41,7 +41,7 @@ int main(int argc, char **argv){
     sum += f(i);
   }
 
-  MPI_Reduce(???);
+  MPI_Reduce(&sum, &answer, 1, MPI_LONG_LONG, MPI_SUM, 0, MPI_COMM_WORLD);
 
   MPI_Barrier(MPI_COMM_WORLD);
   t2 = MPI_Wtime();
